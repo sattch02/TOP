@@ -2,49 +2,47 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// プレイヤーの操作周り
+/// </summary>
 public class PlayerController : MonoBehaviour
 {
-    private Animator anim;
-    private float speed = 0.01f;
-    private Vector2 position;
-    private Vector2 scale;
+    // 操作しているキャラのターゲット
+    [SerializeField] private CharaBase charaBase;
 
     // Start is called before the first frame update
     void Start()
     {
-        this.anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        this.scale = transform.localScale;
-        this.position = transform.position;
-        float inputAxis = Mathf.Abs(Input.GetAxis("Horizontal"));
-
-        anim.SetFloat("Speed", inputAxis);
+        Vector3 input_vec = Vector3.zero;
 
         if (Input.GetKey("right"))
         {
-            this.position.x += speed;
+            input_vec.x += 1;
         }
 
         if (Input.GetKey("left"))
         {
-            this.position.x -= speed;
+            input_vec.x -= 1;
         }
 
-        // 向き
-        if (Input.GetAxis("Horizontal") >= 0)
+        if (charaBase != null)
         {
-            this.scale.x = 1;
-        }
-        else
-        {
-            this.scale.x = -1;
+            charaBase.Move(input_vec);
         }
 
-        transform.position = this.position;
-        transform.localScale = this.scale;
+    }
+
+    /// <summary>
+    /// キャラ設定
+    /// </summary>
+    /// <param name="_charaBase"></param>
+    public void SetChara(CharaBase _charaBase)
+    {
+        charaBase = _charaBase;
     }
 }
