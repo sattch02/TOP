@@ -32,9 +32,15 @@ public class PlayerController : MonoBehaviour
 
         if (charaBase != null)
         {
-            charaBase.Move(input_vec);
+            if (Input.GetKeyDown("space"))
+            {
+                charaBase.Attack(input_vec);
+            }
+            else
+            {
+                charaBase.Move(input_vec);
+            }
         }
-
     }
 
     /// <summary>

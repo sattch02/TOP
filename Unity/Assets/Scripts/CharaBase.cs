@@ -59,12 +59,31 @@ public class CharaBase : MonoBehaviour
     }
 
     /// <summary>
+    /// 攻撃
+    /// </summary>
+    /// <param name="vec"></param>
+    public virtual void Attack(Vector3 vec)
+    {
+        AttackAnimation();
+
+        SetDirection(vec);
+    }
+
+    /// <summary>
     /// 移動アニメーション(速度要素によって)
     /// </summary>
     /// <param name="_speed"></param>
     public virtual void MoveAnimation(float _speed)
     {
         anim.SetFloat("Speed", _speed);
+    }
+
+    /// <summary>
+    /// 攻撃アニメーション
+    /// </summary>
+    public virtual void AttackAnimation()
+    {
+        anim.SetTrigger("Attack");
     }
 
     /// <summary>
