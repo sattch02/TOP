@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Vector3 input_vec = Vector3.zero;
+        bool guard_flg = false;
 
         if (Input.GetKey("right"))
         {
@@ -28,6 +29,11 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey("left"))
         {
             input_vec.x -= 1;
+        }
+
+        if (Input.GetKey("w"))
+        {
+            guard_flg = true;
         }
 
         if (charaBase != null)
@@ -40,6 +46,16 @@ public class PlayerController : MonoBehaviour
             {
                 charaBase.Move(input_vec);
             }
+
+            if (guard_flg)
+            {
+                charaBase.Guard(input_vec, guard_flg);
+            }
+            else
+            {
+                charaBase.GuardAnimation(guard_flg);
+            }
+
         }
     }
 

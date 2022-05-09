@@ -70,6 +70,17 @@ public class CharaBase : MonoBehaviour
     }
 
     /// <summary>
+    /// 防御
+    /// </summary>
+    /// <param name="vec"></param>
+    /// <param name="_guard_flg"></param>
+    public virtual void Guard(Vector3 vec, bool _guard_flg)
+    {
+        GuardAnimation(_guard_flg);
+        SetDirection(vec);
+    }
+
+    /// <summary>
     /// 移動アニメーション(速度要素によって)
     /// </summary>
     /// <param name="_speed"></param>
@@ -84,6 +95,15 @@ public class CharaBase : MonoBehaviour
     public virtual void AttackAnimation()
     {
         anim.SetTrigger("Attack");
+    }
+
+    /// <summary>
+    /// 防御アニメーション
+    /// </summary>
+    /// <param name="_guard_flg"></param>
+    public virtual void GuardAnimation(bool _guard_flg)
+    {
+        anim.SetBool("Guard", _guard_flg);
     }
 
     /// <summary>
