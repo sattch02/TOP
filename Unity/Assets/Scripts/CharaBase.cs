@@ -12,6 +12,7 @@ public class CharaBase : MonoBehaviour
     [SerializeField] private Transform trans;
 
     [SerializeField] private float speed = 10f;
+    [SerializeField] private bool guardFlg = false;
 
     public virtual void Awake()
     {
@@ -27,6 +28,9 @@ public class CharaBase : MonoBehaviour
     public virtual void Update()
     {
         // キャラ独自動作やノックバックなどはここで継承して動作させること
+        GuardAnimation(guardFlg);
+
+        guardFlg = false;
     }
 
     public virtual void Init()
@@ -64,8 +68,21 @@ public class CharaBase : MonoBehaviour
     /// <param name="vec"></param>
     public virtual void Attack(Vector3 vec)
     {
+        if (guardFlg) return;
+
         AttackAnimation();
 
+        SetDirection(vec);
+    }
+
+    /// <summary>
+    /// 防御
+    /// </summary>
+    /// <param name="vec"></param>
+    /// <param name="_guard_flg"></param>
+    public virtual void Guard(Vector3 vec)
+    {
+        guardFlg = true;
         SetDirection(vec);
     }
 
@@ -75,7 +92,14 @@ public class CharaBase : MonoBehaviour
     /// <param name="_speed"></param>
     public virtual void MoveAnimation(float _speed)
     {
-        anim.SetFloat("Speed", _speed);
+        if (guardFlg)
+        {
+            anim.SetFloat("Speed", 0);
+        }
+        else
+        {
+            anim.SetFloat("Speed", _speed);
+        }
     }
 
     /// <summary>
@@ -84,6 +108,15 @@ public class CharaBase : MonoBehaviour
     public virtual void AttackAnimation()
     {
         anim.SetTrigger("Attack");
+    }
+
+    /// <summary>
+    /// 防御アニメーション
+    /// </summary>
+    /// <param name="_guard_flg"></param>
+    public virtual void GuardAnimation(bool _guard_flg)
+    {
+        anim.SetBool("Guard", _guard_flg);
     }
 
     /// <summary>

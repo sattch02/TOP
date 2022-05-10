@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Vector3 input_vec = Vector3.zero;
+        bool attack_flg = false;
+        bool guard_flg = false;
 
         if (Input.GetKey("right"))
         {
@@ -30,15 +32,27 @@ public class PlayerController : MonoBehaviour
             input_vec.x -= 1;
         }
 
+        if (Input.GetKey("w"))
+        {
+            guard_flg = true;
+        }
+
+        if (Input.GetKeyDown("space"))
+        {
+            attack_flg = true;
+        }
+
         if (charaBase != null)
         {
-            if (Input.GetKeyDown("space"))
+            charaBase.Move(input_vec);
+
+            if (guard_flg)
+            {
+                charaBase.Guard(input_vec);
+            }
+            else if (attack_flg)
             {
                 charaBase.Attack(input_vec);
-            }
-            else
-            {
-                charaBase.Move(input_vec);
             }
         }
     }
