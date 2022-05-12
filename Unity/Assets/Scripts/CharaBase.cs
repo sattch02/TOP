@@ -14,7 +14,7 @@ public class CharaBase : MonoBehaviour
     [SerializeField] private float speed = 10f;
     [SerializeField] private bool guardFlg = false;
 
-    [SerializeField] private List<AnimatorControllerParameter> animeNameParameterList = null;
+    [SerializeField] private List<AnimatorControllerParameter> animatorControllerParameterList = null;
 
     public virtual void Awake()
     {
@@ -43,7 +43,7 @@ public class CharaBase : MonoBehaviour
         // TODO:キャラの読み込みや大きさ、当たり判定をデータによって仕込む。
 
         // Animatorに登録されているパラメータを保持
-        animeNameParameterList = new List<AnimatorControllerParameter>(anim.parameters);
+        animatorControllerParameterList = new List<AnimatorControllerParameter>(anim.parameters);
     }
 
     /// <summary>
@@ -98,7 +98,7 @@ public class CharaBase : MonoBehaviour
     public virtual void MoveAnimation(float _speed)
     {
         const string animeName = "Speed";
-        if (!animeNameParameterList.Exists(x => x.name.Equals(animeName)))
+        if (!animatorControllerParameterList.Exists(x => x.name.Equals(animeName)))
         {
             return;
         }
@@ -119,7 +119,7 @@ public class CharaBase : MonoBehaviour
     public virtual void AttackAnimation()
     {
         const string animeName = "Attack";
-        if (!animeNameParameterList.Exists(x => x.name.Equals(animeName)))
+        if (!animatorControllerParameterList.Exists(x => x.name.Equals(animeName)))
         {
             return;
         }
@@ -133,7 +133,7 @@ public class CharaBase : MonoBehaviour
     public virtual void GuardAnimation(bool _guard_flg)
     {
         const string animeName = "Guard";
-        if (!animeNameParameterList.Exists(x => x.name.Equals(animeName)))
+        if (!animatorControllerParameterList.Exists(x => x.name.Equals(animeName)))
         {
             return;
         }
