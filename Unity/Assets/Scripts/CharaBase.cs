@@ -14,6 +14,8 @@ public class CharaBase : MonoBehaviour
     [SerializeField] private float speed = 10f;
     [SerializeField] private bool guardFlg = false;
 
+    [SerializeField] private List<AnimatorControllerParameter> animatorControllerParameterList = null;
+
     public virtual void Awake()
     {
         Init();
@@ -39,6 +41,9 @@ public class CharaBase : MonoBehaviour
         trans = transform;
 
         // TODO:キャラの読み込みや大きさ、当たり判定をデータによって仕込む。
+
+        // Animatorに登録されているパラメータを保持
+        animatorControllerParameterList = new List<AnimatorControllerParameter>(anim.parameters);
     }
 
     /// <summary>
@@ -92,13 +97,19 @@ public class CharaBase : MonoBehaviour
     /// <param name="_speed"></param>
     public virtual void MoveAnimation(float _speed)
     {
+        const string animeName = "Speed";
+        if (!animatorControllerParameterList.Exists(x => x.name.Equals(animeName)))
+        {
+            return;
+        }
+
         if (guardFlg)
         {
-            anim.SetFloat("Speed", 0);
+            anim.SetFloat(animeName, 0);
         }
         else
         {
-            anim.SetFloat("Speed", _speed);
+            anim.SetFloat(animeName, _speed);
         }
     }
 
@@ -107,7 +118,12 @@ public class CharaBase : MonoBehaviour
     /// </summary>
     public virtual void AttackAnimation()
     {
-        anim.SetTrigger("Attack");
+        const string animeName = "Attack";
+        if (!animatorControllerParameterList.Exists(x => x.name.Equals(animeName)))
+        {
+            return;
+        }
+        anim.SetTrigger(animeName);
     }
 
     /// <summary>
@@ -116,7 +132,12 @@ public class CharaBase : MonoBehaviour
     /// <param name="_guard_flg"></param>
     public virtual void GuardAnimation(bool _guard_flg)
     {
-        anim.SetBool("Guard", _guard_flg);
+        const string animeName = "Guard";
+        if (!animatorControllerParameterList.Exists(x => x.name.Equals(animeName)))
+        {
+            return;
+        }
+        anim.SetBool(animeName, _guard_flg);
     }
 
     /// <summary>
