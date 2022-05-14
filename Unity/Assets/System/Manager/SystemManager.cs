@@ -33,12 +33,12 @@ public class SystemManager : SingletonMonoBehaviour<SystemManager>
     /// <param name="title"></param>
     /// <param name="type"></param>
     /// <param name="callback"></param>
-    public static void OpenSystemDialog(string message, string title = "", SYSTEM_DIALOG_BUTTON_TYPE type = SYSTEM_DIALOG_BUTTON_TYPE.OK, Action<SYSTEM_DIALOG_BUTTON_RESULT> callback = null)
+    public static void OpenSystemDialog(string message, string title = "", SYSTEM_DIALOG_BUTTON_TYPE type = SYSTEM_DIALOG_BUTTON_TYPE.OK, Action<SYSTEM_DIALOG_BUTTON_RESULT> callback = null, string okButtonName = "", string cancelButtonName = "")
     {
 #if DIALOG_IN_GAME_UI
         // ゲーム内で作成するならdefineをonにしてその仕組みを作ってここに書く
 #else
-        SystemDialog.Open(title, message, type, callback);
+        SystemDialog.Open(title, message, type, callback, okButtonName, cancelButtonName);
 #endif
     }
 
