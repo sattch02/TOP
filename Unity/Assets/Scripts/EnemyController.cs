@@ -18,9 +18,6 @@ public class EnemyController : MonoBehaviour
     {
         Vector3 input_vec = Vector3.zero;
 
-        // キャラの現在位置を取得
-        Vector3 charaPosi = charaBase.GetCharaPosition();
-
         counterTime += Time.deltaTime;
 
         if (Mathf.Floor(counterTime) % 2 == 0)
