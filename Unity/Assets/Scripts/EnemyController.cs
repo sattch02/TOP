@@ -6,15 +6,36 @@ public class EnemyController : MonoBehaviour
 {
     [SerializeField] private CharaBase charaBase;
 
+    [SerializeField] private float counterTime = 0;
+
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
     void Update()
     {
+        Vector3 input_vec = Vector3.zero;
+
+        // キャラの現在位置を取得
+        Vector3 charaPosi = charaBase.GetCharaPosition();
+
+        counterTime += Time.deltaTime;
+
+        if (Mathf.Floor(counterTime) % 2 == 0)
+        {
+            input_vec.x -= 1;
+        }
+        else
+        {
+            input_vec.x += 1;
+        }
+
+        if (charaBase != null)
+        {
+            charaBase.Move(input_vec);
+        }
     }
 
     /// <summary>

@@ -164,4 +164,12 @@ public class CharaBase : MonoBehaviour
             transform.localScale = tempScale;
         }
     }
+
+    /// <summary>
+    /// キャラのポジション取得
+    /// </summary>
+    public virtual Vector3 GetCharaPosition()
+    {
+        return transform.position;
+    }
 }
