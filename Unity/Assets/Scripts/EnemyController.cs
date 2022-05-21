@@ -20,6 +20,7 @@ public class EnemyController : MonoBehaviour
 
         counterTime += Time.deltaTime;
 
+        /*
         if (Mathf.Floor(counterTime) % 2 == 0)
         {
             input_vec.x -= 1;
@@ -32,7 +33,7 @@ public class EnemyController : MonoBehaviour
         if (charaBase != null)
         {
             charaBase.Move(input_vec);
-        }
+        }*/
     }
 
     /// <summary>
