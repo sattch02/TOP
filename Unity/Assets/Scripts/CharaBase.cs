@@ -13,6 +13,7 @@ public class CharaBase : MonoBehaviour
 
     [SerializeField] private float speed = 10f;
     [SerializeField] private bool guardFlg = false;
+    [SerializeField] private bool backWalkFlg = false;
 
     [SerializeField] private List<AnimatorControllerParameter> animatorControllerParameterList = null;
 
@@ -55,7 +56,26 @@ public class CharaBase : MonoBehaviour
         // 速度計算
         float speed_x = speed * Time.deltaTime * vec.x;
 
-        MoveAnimation(Mathf.Abs(vec.x));
+        if (speed_x >= 0)
+        {
+            backWalkFlg = false;
+            MoveAnimation(Mathf.Abs(vec.x));
+        }
+
+        if (speed_x <= 0)
+        {
+            backWalkFlg = true;
+        }
+
+        if (!backWalkFlg)
+        {
+            MoveAnimation(Mathf.Abs(vec.x));
+        }
+        else
+        {
+            BackMoveAnimation(Mathf.Abs(vec.x));
+        }
+
 
         if (speed_x != 0)
         {
@@ -64,7 +84,7 @@ public class CharaBase : MonoBehaviour
             transform.localPosition = tempPosition;
         }
 
-        SetDirection(vec);
+        //SetDirection(vec);
     }
 
     /// <summary>
@@ -98,6 +118,28 @@ public class CharaBase : MonoBehaviour
     public virtual void MoveAnimation(float _speed)
     {
         const string animeName = "Speed";
+        if (!animatorControllerParameterList.Exists(x => x.name.Equals(animeName)))
+        {
+            return;
+        }
+
+        if (guardFlg)
+        {
+            anim.SetFloat(animeName, 0);
+        }
+        else
+        {
+            anim.SetFloat(animeName, _speed);
+        }
+    }
+
+    /// <summary>
+    /// 後ろ移動アニメーション(速度要素によって)
+    /// </summary>
+    /// <param name="_speed"></param>
+    public virtual void BackMoveAnimation(float _speed)
+    {
+        const string animeName = "BackSpeed";
         if (!animatorControllerParameterList.Exists(x => x.name.Equals(animeName)))
         {
             return;
