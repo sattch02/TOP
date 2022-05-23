@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
         Vector3 input_vec = Vector3.zero;
         bool attack_flg = false;
         bool guard_flg = false;
+        bool strong_attack_flg = false;
 
 
         if (Input.GetKey("right"))
@@ -43,6 +44,11 @@ public class PlayerController : MonoBehaviour
             attack_flg = true;
         }
 
+        if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
+        {
+            strong_attack_flg = true;
+        }
+
         if (charaBase != null)
         {
             charaBase.Move(input_vec);
@@ -54,6 +60,10 @@ public class PlayerController : MonoBehaviour
             else if (attack_flg)
             {
                 charaBase.Attack(input_vec);
+            }
+            else if (strong_attack_flg)
+            {
+                charaBase.StrongAttack(input_vec);
             }
         }
     }

@@ -101,6 +101,19 @@ public class CharaBase : MonoBehaviour
     }
 
     /// <summary>
+    /// 強攻撃
+    /// </summary>
+    /// <param name="vec"></param>
+    public virtual void StrongAttack(Vector3 vec)
+    {
+        if (guardFlg) return;
+
+        StrongAttackAnimation();
+
+        SetDirection(vec);
+    }
+
+    /// <summary>
     /// 防御
     /// </summary>
     /// <param name="vec"></param>
@@ -161,6 +174,19 @@ public class CharaBase : MonoBehaviour
     public virtual void AttackAnimation()
     {
         const string animeName = "Attack";
+        if (!animatorControllerParameterList.Exists(x => x.name.Equals(animeName)))
+        {
+            return;
+        }
+        anim.SetTrigger(animeName);
+    }
+
+    /// <summary>
+    /// 強攻撃アニメーション
+    /// </summary>
+    public virtual void StrongAttackAnimation()
+    {
+        const string animeName = "StrongAttack";
         if (!animatorControllerParameterList.Exists(x => x.name.Equals(animeName)))
         {
             return;
