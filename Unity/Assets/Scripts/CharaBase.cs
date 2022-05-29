@@ -15,6 +15,9 @@ public class CharaBase : MonoBehaviour
     [SerializeField] private bool guardFlg = false;
     [SerializeField] private bool backWalkFlg = false;
 
+    public float maxHp = 5;
+    public float Hp = 5;
+
     [SerializeField] private List<AnimatorControllerParameter> animatorControllerParameterList = null;
 
     public virtual void Awake()
