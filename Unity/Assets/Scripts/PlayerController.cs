@@ -23,7 +23,6 @@ public class PlayerController : MonoBehaviour
         bool guard_flg = false;
         bool strong_attack_flg = false;
 
-
         if (Input.GetKey("right"))
         {
             input_vec.x += 1;
