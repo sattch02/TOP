@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
 
         if (charaBase != null)
         {
-            charaBase.Move(input_vec);
+            charaBase.Move(input_vec, guard_flg);
 
             if (guard_flg)
             {
