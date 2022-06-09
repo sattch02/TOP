@@ -54,8 +54,15 @@ public class CharaBase : MonoBehaviour
     /// 移動(ベクトルの向きで)
     /// </summary>
     /// <param name="vec"></param>
-    public virtual void Move(Vector3 vec)
+    /// <param name="guardFlg"></param>
+    public virtual void Move(Vector3 vec, bool guardFlg)
     {
+        // ガード中は移動不可
+        if (guardFlg)
+        {
+            return;
+        }
+
         // 速度計算
         float speed_x = speed * Time.deltaTime * vec.x;
 
@@ -124,7 +131,8 @@ public class CharaBase : MonoBehaviour
     public virtual void Guard(Vector3 vec)
     {
         guardFlg = true;
-        SetDirection(vec);
+
+        //SetDirection(vec);
     }
 
     /// <summary>
