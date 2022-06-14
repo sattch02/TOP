@@ -42,3 +42,21 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Sky
+    uniqueID: 2273668497
+    locked: 0
+  - name: Mountain
+    uniqueID: 3322253541
+    locked: 0
+  - name: Ground
+    uniqueID: 3075186819
+    locked: 0
+  - name: Wood
+    uniqueID: 3718470215
+    locked: 0
+  - name: Fence
+    uniqueID: 2028783657
+    locked: 0
+  - name: Chara
+    uniqueID: 449364895
+    locked: 0
