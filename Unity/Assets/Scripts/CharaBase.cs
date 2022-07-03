@@ -15,6 +15,8 @@ public class CharaBase : MonoBehaviour
     [SerializeField] private bool guardFlg = false;
     [SerializeField] private bool backWalkFlg = false;
 
+    [SerializeField] private float xLimit = 8.5f;
+
     public float maxHp = 5;
     public float Hp = 5;
 
@@ -92,6 +94,9 @@ public class CharaBase : MonoBehaviour
             Vector3 tempPosition = transform.localPosition;
             tempPosition.x += speed_x;
             transform.localPosition = tempPosition;
+
+            // 画面外から出ないようにする
+            transform.position = new Vector3(Mathf.Clamp(transform.position.x, -xLimit, xLimit), transform.position.y, transform.position.z);
         }
 
         //SetDirection(vec);
