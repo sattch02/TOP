@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 {
     // 操作しているキャラのターゲット
     [SerializeField] private CharaBase charaBase;
+    [SerializeField] private bool player_flg = true;
 
     // Start is called before the first frame update
     void Start()
@@ -50,7 +51,7 @@ public class PlayerController : MonoBehaviour
 
         if (charaBase != null)
         {
-            charaBase.Move(input_vec, guard_flg);
+            charaBase.Move(input_vec, guard_flg, player_flg);
 
             if (guard_flg)
             {
