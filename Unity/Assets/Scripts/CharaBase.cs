@@ -69,11 +69,6 @@ public class CharaBase : MonoBehaviour
         // 速度計算
         float speed_x = speed * Time.deltaTime * vec.x;
 
-        if (!playerFlg)
-        {
-            Debug.Log("enemy_speed:::" + speed_x);
-        }
-
         if (playerFlg)
         {
             if (speed_x >= 0)
@@ -89,18 +84,16 @@ public class CharaBase : MonoBehaviour
         }
         else
         {
-            if (speed_x <= 0)
+            if (transform.localPosition.x <= 0.0f)
             {
-                backWalkFlg = false;
+                backWalkFlg = true;
                 MoveAnimation(Mathf.Abs(vec.x));
             }
 
-            if (speed_x >= 0)
+            if (transform.localPosition.x >= 0.0f)
             {
-                backWalkFlg = true;
+                backWalkFlg = false;
             }
-
-            Debug.Log("backwalkflg:::" + backWalkFlg);
 
         }
 
@@ -126,8 +119,10 @@ public class CharaBase : MonoBehaviour
 
         if (!playerFlg)
         {
-            Debug.Log("enemy------");
-            SetDirection(vec);
+            if (!backWalkFlg)
+            {
+                SetDirection(vec);
+            }
         }
     }
 
