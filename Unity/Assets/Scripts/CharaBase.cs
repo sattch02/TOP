@@ -90,7 +90,7 @@ public class CharaBase : MonoBehaviour
                 MoveAnimation(Mathf.Abs(vec.x));
             }
 
-            if (transform.localPosition.x >= 0.0f)
+            if (transform.localPosition.x >= 5.0f)
             {
                 backWalkFlg = false;
             }
