@@ -8,6 +8,8 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField] private float counterTime = 0;
 
+    [SerializeField] private bool player_flg = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +22,9 @@ public class EnemyController : MonoBehaviour
 
         counterTime += Time.deltaTime;
 
-        /*
+        bool guard_flg = false;
+
+
         if (Mathf.Floor(counterTime) % 2 == 0)
         {
             input_vec.x -= 1;
@@ -32,8 +36,8 @@ public class EnemyController : MonoBehaviour
 
         if (charaBase != null)
         {
-            charaBase.Move(input_vec);
-        }*/
+            charaBase.Move(input_vec, guard_flg, player_flg);
+        }
     }
 
     /// <summary>

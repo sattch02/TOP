@@ -57,7 +57,8 @@ public class CharaBase : MonoBehaviour
     /// </summary>
     /// <param name="vec"></param>
     /// <param name="guardFlg"></param>
-    public virtual void Move(Vector3 vec, bool guardFlg)
+    /// <param name="playerFlg"></param>
+    public virtual void Move(Vector3 vec, bool guardFlg, bool playerFlg)
     {
         // ガード中は移動不可
         if (guardFlg)
@@ -68,16 +69,34 @@ public class CharaBase : MonoBehaviour
         // 速度計算
         float speed_x = speed * Time.deltaTime * vec.x;
 
-        if (speed_x >= 0)
+        if (playerFlg)
         {
-            backWalkFlg = false;
-            MoveAnimation(Mathf.Abs(vec.x));
+            if (speed_x >= 0)
+            {
+                backWalkFlg = false;
+                MoveAnimation(Mathf.Abs(vec.x));
+            }
+
+            if (speed_x <= 0)
+            {
+                backWalkFlg = true;
+            }
+        }
+        else
+        {
+            if (transform.localPosition.x <= 0.0f)
+            {
+                backWalkFlg = true;
+                MoveAnimation(Mathf.Abs(vec.x));
+            }
+
+            if (transform.localPosition.x >= xLimit)
+            {
+                backWalkFlg = false;
+            }
+
         }
 
-        if (speed_x <= 0)
-        {
-            backWalkFlg = true;
-        }
 
         if (!backWalkFlg)
         {
@@ -87,7 +106,6 @@ public class CharaBase : MonoBehaviour
         {
             BackMoveAnimation(Mathf.Abs(vec.x));
         }
-
 
         if (speed_x != 0)
         {
@@ -99,7 +117,13 @@ public class CharaBase : MonoBehaviour
             transform.position = new Vector3(Mathf.Clamp(transform.position.x, -xLimit, xLimit), transform.position.y, transform.position.z);
         }
 
-        //SetDirection(vec);
+        if (!playerFlg)
+        {
+            if (!backWalkFlg)
+            {
+                SetDirection(vec);
+            }
+        }
     }
 
     /// <summary>
