@@ -55,15 +55,15 @@ public class PlayerController : MonoBehaviour
 
             if (guard_flg)
             {
-                charaBase.Guard(input_vec);
+                charaBase.Guard(input_vec, player_flg);
             }
             else if (attack_flg)
             {
-                charaBase.Attack(input_vec);
+                charaBase.Attack(input_vec, player_flg);
             }
             else if (strong_attack_flg)
             {
-                charaBase.StrongAttack(input_vec);
+                charaBase.StrongAttack(input_vec, player_flg);
             }
         }
     }

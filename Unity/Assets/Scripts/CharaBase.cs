@@ -130,38 +130,52 @@ public class CharaBase : MonoBehaviour
     /// 攻撃
     /// </summary>
     /// <param name="vec"></param>
-    public virtual void Attack(Vector3 vec)
+    /// <param name="playerFlg"></param>
+    public virtual void Attack(Vector3 vec, bool playerFlg)
     {
         if (guardFlg) return;
 
         AttackAnimation();
 
-        SetDirection(vec);
+        // 自キャラは向き設定行わない
+        if (!playerFlg)
+        {
+            SetDirection(vec);
+        }
     }
 
     /// <summary>
     /// 強攻撃
     /// </summary>
     /// <param name="vec"></param>
-    public virtual void StrongAttack(Vector3 vec)
+    /// <param name="playerFlg"></param>
+    public virtual void StrongAttack(Vector3 vec, bool playerFlg)
     {
         if (guardFlg) return;
 
         StrongAttackAnimation();
 
-        SetDirection(vec);
+        // 自キャラは向き設定行わない
+        if (!playerFlg)
+        {
+            SetDirection(vec);
+        }
     }
 
     /// <summary>
     /// 防御
     /// </summary>
     /// <param name="vec"></param>
-    /// <param name="_guard_flg"></param>
-    public virtual void Guard(Vector3 vec)
+    /// <param name="playerFlg"></param>
+    public virtual void Guard(Vector3 vec, bool playerFlg)
     {
         guardFlg = true;
 
-        //SetDirection(vec);
+        // 自キャラは向き設定行わない
+        if (!playerFlg)
+        {
+            SetDirection(vec);
+        }
     }
 
     /// <summary>
