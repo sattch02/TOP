@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 {
     // 操作しているキャラのターゲット
     [SerializeField] private CharaBase charaBase;
+    [SerializeField] private bool player_flg = true;
 
     // Start is called before the first frame update
     void Start()
@@ -50,19 +51,19 @@ public class PlayerController : MonoBehaviour
 
         if (charaBase != null)
         {
-            charaBase.Move(input_vec, guard_flg);
+            charaBase.Move(input_vec, guard_flg, player_flg);
 
             if (guard_flg)
             {
-                charaBase.Guard(input_vec);
+                charaBase.Guard(input_vec, player_flg);
             }
             else if (attack_flg)
             {
-                charaBase.Attack(input_vec);
+                charaBase.Attack(input_vec, player_flg);
             }
             else if (strong_attack_flg)
             {
-                charaBase.StrongAttack(input_vec);
+                charaBase.StrongAttack(input_vec, player_flg);
             }
         }
     }
